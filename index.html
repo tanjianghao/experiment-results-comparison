@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>实验结果对比</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>实验结果对比</h1>
+      <p>选择两份或更多 CSV，按轮次对齐指标。文件仅在当前浏览器读取。</p>
+    </header>
+
+    <section class="panel" aria-labelledby="files-title">
+      <div class="panel-head">
+        <h2 id="files-title">实验文件</h2>
+        <div class="fields">
+          <button class="button ghost" type="button" id="example">试用示例</button>
+          <button class="button ghost" type="button" id="clear" hidden>清空文件</button>
+        </div>
+      </div>
+      <div class="drop" id="drop">
+        <input type="file" id="files" accept=".csv,text/csv" multiple hidden>
+        <button class="button primary" type="button" id="choose">选择 CSV 文件</button>
+        <p>也可以把文件拖到这里，或分多次添加。</p>
+      </div>
+      <ul class="file-list" id="file-list" aria-label="已选文件" hidden></ul>
+      <p class="status" id="file-status" role="status">请至少添加两份 CSV。</p>
+    </section>
+
+    <section class="panel" id="comparison" aria-labelledby="comparison-title" hidden>
+      <div class="panel-head">
+        <h2 id="comparison-title">指标对比</h2>
+        <div class="fields">
+          <label>轮次列 <select id="step"></select></label>
+          <label>显示指标 <select id="metric"></select></label>
+        </div>
+      </div>
+      <p id="comparison-status" role="status"></p>
+      <div id="metric-view" hidden>
+        <div class="legend" id="legend"></div>
+        <div class="chart-scroll"><div id="chart"></div></div>
+        <div class="details">
+          <h3>最近共同轮次</h3>
+          <p id="snapshot-note"></p>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th scope="col">实验</th><th scope="col">指标值</th><th scope="col">相对基准的差值</th></tr></thead>
+              <tbody id="snapshot"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <details id="coverage-details" hidden>
+        <summary>未对比的列</summary>
+        <ul class="coverage" id="coverage"></ul>
+      </details>
+    </section>
+  </main>
+  <script src="./script.js" defer></script>
+</body>
+</html>
